@@ -10,7 +10,7 @@ import uz.pdp.g56_online_market.services.ProductService;
 
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/home")
+@WebServlet("/")
 public class HomeServlet extends HttpServlet {
 
     private ProductService productService = new ProductService();

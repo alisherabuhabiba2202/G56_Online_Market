@@ -3,13 +3,17 @@ package uz.pdp.g56_online_market.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
 @Data
-public class Products extends AuditEntity{
+public class Products{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
     private String description;
