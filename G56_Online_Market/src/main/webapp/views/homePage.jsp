@@ -9,12 +9,12 @@
 <body>
 <jsp:include page="../fragments/NavbarHomePage.jsp"/>
 <br>
-<div class="row">
+<div class="row justify-content-center">
     <c:forEach items="${products}" var="product">
         <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="product.png">
-                <div class="card-body">
+                <img src="/files/${product.filePath}" class="card-img-top" alt="product.png">
+                <div class="card-body text-center">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">Narx : ${product.price}</p>
                     <a href="/productInfo?id=${product.id}" class="btn btn-primary">More...</a>
@@ -22,8 +22,8 @@
             </div>
         </div>
     </c:forEach>
-
 </div>
+
 
 <jsp:include page="../js/js.jsp"/>
 </body>
