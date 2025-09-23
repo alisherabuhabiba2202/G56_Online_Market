@@ -38,20 +38,35 @@ public class ProductDAO {
         }
     }
 
-    public int getProductQuatityById(int id) {
+    public int getProductQuantityById(int id) {
         EntityManager productEntityManager = JpaConfig.getEntityManagerFactory().createEntityManager();
         try {
             productEntityManager.getTransaction().begin();
-            Query query = productEntityManager.createNativeQuery("select  sum(i.quntity) - sum(o.quntity) from income i join outcome o on i.product_id = o.product_id where i.product_id = " + id);
+            Query query = productEntityManager.createNativeQuery("select  sum(i.quantity) - sum(o.quantity) from income i join outcome o on i.product_id = o.product_id where i.product_id = " + id);
             Object singleResult = query.getSingleResult();
             productEntityManager.getTransaction().commit();
             return Integer.parseInt(singleResult.toString());
         } catch (Exception ex) {
-            productEntityManager.getTransaction().rollback();
+                productEntityManager.getTransaction().rollback();
             throw ex;
         }
         finally {
             productEntityManager.close();
+        }
+    }
+
+    public Products getProductById(int id) {
+        EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Products product = em.find(Products.class, id);
+            em.getTransaction().commit();
+            return product;
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        } finally {
+            em.close();
         }
     }
 }

@@ -16,8 +16,7 @@ public class AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(nullable = false, updatable = false)
-//    private Timestamp createdAt;
-//
-//    private Timestamp updatedAt;
+   @Column(nullable = false, updatable = false)
+    private Timestamp createdAt;
+   private Timestamp updatedAt;
 }

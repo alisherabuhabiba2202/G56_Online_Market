@@ -1,13 +1,11 @@
 package uz.pdp.g56_online_market.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
-//@EqualsAndHashCode(callSuper = true)
+
 @Entity
+@Table(name = "brands")
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -17,6 +15,8 @@ public class Brands{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @Column(nullable = false, unique=true)
     private String name;
+    @Column(nullable = false)
+    private String filepath;
 }

@@ -5,10 +5,12 @@
              version="3.0">
     <persistence-unit name="postgresql_orm">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>uz.pdp.g56_online_market.entities.Products</class>
+        <class>uz.pdp.g56_online_market.entities.Brands</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-            <property name="jakarta.persistence.jdbc.password" value="admin"/>
+            <property name="jakarta.persistence.jdbc.password" value="Saidakbar123"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
