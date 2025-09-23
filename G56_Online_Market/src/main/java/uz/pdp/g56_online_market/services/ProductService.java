@@ -32,4 +32,8 @@ public class ProductService {
         return productDTOS;
     }
 
+    public Products getProductById(int id) {
+        return productDAO.findById(id);
+    }
+
 }
