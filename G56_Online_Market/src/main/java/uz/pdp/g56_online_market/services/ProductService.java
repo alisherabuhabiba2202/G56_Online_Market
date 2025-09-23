@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ProductService {
 
-    private ProductDAO productDAO = new ProductDAO();
+    private final ProductDAO productDAO = new ProductDAO();
 
     public List<ProductDTO>  getProductsByPageable(int page, int size) {
         List<Products> products = productDAO.getProductsByPageable(page, size);
@@ -27,7 +27,7 @@ public class ProductService {
                     .build());
         }
         productDTOS.forEach(item ->{
-            item.setQuantity(productDAO.getProductQuatityById(item.getId()));
+            item.setQuantity(productDAO.getProductQuantityById(item.getId()));
         });
         return productDTOS;
     }
