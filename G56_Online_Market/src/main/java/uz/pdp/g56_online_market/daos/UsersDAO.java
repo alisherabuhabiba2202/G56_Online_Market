@@ -9,6 +9,24 @@ import java.util.List;
 
 public class UsersDAO {
 
+    public boolean changeRoleName(Integer userId, RoleName roleName){
+        EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            int rowsAffected = em.createQuery("UPDATE Users u SET u.roleName = :roleName WHERE u.id = :id")
+                    .setParameter("roleName", roleName)
+                    .setParameter("id", userId)
+                    .executeUpdate();
+            em.getTransaction().commit();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
     public boolean deleteUser(Integer id) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
         try {
@@ -29,26 +47,12 @@ public class UsersDAO {
         }
     }
 
-    public boolean saveAccountant(Users user) {
-        EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
-        try {
-            user.setRoleName(RoleName.ACCOUNTANT);
-            em.getTransaction().begin();
-            em.persist(user);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            return false;
-        } finally {
-            em.close();
-        }
-    }
 
-    public static boolean saveUser(Users user) {
+
+    public  boolean saveUser(Users user,RoleName roleName) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
         try {
-                user.setRoleName(RoleName.USER);
+                user.setRoleName(roleName);
                 user.setActive(true);
                 em.getTransaction().begin();
                 em.persist(user);
@@ -63,21 +67,22 @@ public class UsersDAO {
         }
     }
 
-    public static Users findUserByUsername(String username) {
+    public Users findUserByUsername(String username) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
+        Users user = null;
         try {
             em.getTransaction().begin();
-            Users user = em.createQuery("SELECT u FROM Users u WHERE u.username = :username", Users.class)
+            user = em.createQuery("SELECT u FROM Users u WHERE u.username = :username", Users.class)
                     .setParameter("username", username)
                     .getSingleResult();
             em.getTransaction().commit();
-            return user;
+
         } catch (Exception e) {
             em.getTransaction().rollback();
-            return null;
         } finally {
             em.close();
         }
+        return user;
     }
 
     public List<Users> findUsersByRoleName(RoleName roleName) {
@@ -102,12 +107,12 @@ public class UsersDAO {
         }
     }
 
-    public static boolean deactivateUser(Integer id) {
+    public  boolean changeActivateUser(Integer id,boolean active) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
         try {
             em.getTransaction().begin();
             int rowsAffected = em.createQuery("UPDATE Users u SET u.active = :active WHERE u.id = :id")
-                    .setParameter("active", false)
+                    .setParameter("active", active)
                     .setParameter("id", id)
                     .executeUpdate();
             em.getTransaction().commit();
@@ -120,21 +125,5 @@ public class UsersDAO {
         }
     }
 
-    public static boolean activateUser(Integer id) {
-        EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
-        try {
-            em.getTransaction().begin();
-            int rowsAffected = em.createQuery("UPDATE Users u SET u.active = :active WHERE u.id = :id")
-                    .setParameter("active", true)
-                    .setParameter("id", id)
-                    .executeUpdate();
-            em.getTransaction().commit();
-            return rowsAffected > 0;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            return false;
-        } finally {
-            em.close();
-        }
-    }
+
 }

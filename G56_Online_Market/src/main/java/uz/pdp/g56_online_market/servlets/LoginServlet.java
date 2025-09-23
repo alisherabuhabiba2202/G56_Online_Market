@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 import uz.pdp.g56_online_market.entities.Users;
 import uz.pdp.g56_online_market.services.UsersService;
 
@@ -22,13 +23,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        Users user = new Users().builder().username(username).password(password).build();
-        boolean login = usersService.login(user);
-        if(login == true){
-            req.setAttribute("message","success");
-        }else {
-            req.setAttribute("error","fail");
-        }
-        req.getRequestDispatcher("/views/login.jsp").forward(req,resp);
+
+        boolean login = usersService.login(username, password,req.getSession());
+        resp.sendRedirect("/cabinet");
     }
 }

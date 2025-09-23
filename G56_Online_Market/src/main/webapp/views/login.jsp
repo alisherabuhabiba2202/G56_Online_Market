@@ -91,8 +91,6 @@
 <body>
 <div class="login-container">
     <h2>Login</h2>
-    <c:if test="${not empty message}"><p class="message">${message}</p></c:if>
-    <c:if test="${not empty error}"><p class="error">${error}</p></c:if>
     <form action="/login" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
