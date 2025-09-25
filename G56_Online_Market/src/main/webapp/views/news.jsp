@@ -44,7 +44,7 @@
                     <p class="card-text"><%= n.getDescription() %></p>
 
                     <div class="d-flex gap-2 justify-content-center">
-                        <a href="/views/edit.jsp?id=<%=n.getId()%>" class="btn btn-primary">UPDATE</a>
+                        <a href="/views/edit.jsp?id=<%=n.getId()%>" class="btn btn-primary">EDIT</a>
                         <form action="/delete?id=<%= n.getId() %>" method="post" class="m-0 p-0">
                             <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>
