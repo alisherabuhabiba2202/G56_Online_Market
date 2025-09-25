@@ -124,6 +124,25 @@ public class UsersDAO {
             em.close();
         }
     }
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("uz.pdp.g56_online_market");
+    public User findById(long id) {
+        EntityManager em = emf.createEntityManager();
+        try{
+            return em.find(User.class, id);
+        }finally{
+            em.close();
+        }
+    }
+    public void update(User user) {
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+    }
 
 
 }
