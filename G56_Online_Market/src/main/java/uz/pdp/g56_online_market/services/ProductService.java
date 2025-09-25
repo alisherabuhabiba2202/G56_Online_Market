@@ -2,12 +2,11 @@ package uz.pdp.g56_online_market.services;
 
 import uz.pdp.g56_online_market.daos.ProductDAO;
 import uz.pdp.g56_online_market.dtos.ProductDTO;
+import uz.pdp.g56_online_market.entities.Brands;
 import uz.pdp.g56_online_market.entities.Products;
-import uz.pdp.g56_online_market.mappers.ProductMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductService {
 
@@ -17,7 +16,7 @@ public class ProductService {
         List<Products> products = productDAO.getProductsByPageable(page, size);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for (Products product : products) {
-            productDTOS.add(new ProductDTO().builder()
+            productDTOS.add(ProductDTO.builder()
                     .id(product.getId())
                     .name(product.getName())
                     .description(product.getDescription())
@@ -27,9 +26,44 @@ public class ProductService {
                     .build());
         }
         productDTOS.forEach(item ->{
-            item.setQuantity(productDAO.getProductQuatityById(item.getId()));
+            item.setQuantity(productDAO.getProductQuantityById(item.getId()));
         });
         return productDTOS;
+    }
+
+    public void addProduct(String name, String desc, Double price, String filePath, Brands brand) {
+        Products p = Products.builder()
+                .name(name)
+                .description(desc)
+                .price(price)
+                .filePath(filePath)
+                .brand(brand)
+                .build();
+        productDAO.save(p);
+    }
+
+    public void updateProduct(int id, String name, String desc, Double price, String filePath, Brands brand) {
+        Products p = productDAO.findById(id);
+        if (p != null) {
+            p.setName(name);
+            p.setDescription(desc);
+            p.setPrice(price);
+            p.setFilePath(filePath);
+            p.setBrand(brand);
+            productDAO.update(p);
+        }
+    }
+
+    public void deleteProduct(int id) {
+        productDAO.delete(id);
+    }
+
+    public Products getById(int id) {
+        return productDAO.findById(id);
+    }
+
+    public List<Products> getAllProducts() {
+        return productDAO.getAllProducts();
     }
 
 }

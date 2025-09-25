@@ -20,6 +20,6 @@ public class Products{
     private Double price;
     private String filePath;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Brands brand;
 }
