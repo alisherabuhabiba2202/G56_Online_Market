@@ -19,8 +19,8 @@
     News news = NewsDAO.getNewsById(newsId);
 %>
 <div class="container mt-5">
-    <h2 class="mb-4">Mahsulotni edit qilish</h2>
-    <form action="/edit" method="post" enctype="multipart/form-data">
+    <h2 class="mb-4">Yangilik edit qilish</h2>
+    <form action="/newsEdit" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label for="name" class="form-label">Mahsulot nomi</label>

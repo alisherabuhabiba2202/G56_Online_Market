@@ -12,7 +12,7 @@ import uz.pdp.g56_online_market.entities.News;
 
 import java.io.IOException;
 
-@WebServlet("/add")
+@WebServlet("/newsAdd")
 @MultipartConfig
 public class AddServlet extends HttpServlet {
     @Override

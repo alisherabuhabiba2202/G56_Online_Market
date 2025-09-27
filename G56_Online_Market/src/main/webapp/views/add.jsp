@@ -16,16 +16,16 @@
 <jsp:include page="../fragments/NavbarHomePage.jsp"/>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Yangi mahsulot qo‘shish</h2>
-    <form action="/add" method="post" enctype="multipart/form-data">
+    <h2 class="mb-4">Yangilik qo‘shish</h2>
+    <form action="/newsAdd" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
-            <label for="name" class="form-label">Mahsulot nomi</label>
+            <label for="name" class="form-label">Yangilik nomi</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Tavsif</label>
+            <label for="description" class="form-label">Yangilik tavsifi</label>
             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
         </div>
 

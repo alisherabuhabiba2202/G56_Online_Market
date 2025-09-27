@@ -25,7 +25,7 @@
             <h1 class="m-0">Yangiliklar</h1>
         </div>
         <div class="col-md-6 d-flex justify-content-end align-items-center">
-            <a href="/views/add.jsp" class="btn btn-primary">Add</a>
+            <a href="/views/add.jsp" class="btn btn-primary">NewsAdd</a>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
 
                     <div class="d-flex gap-2 justify-content-center">
                         <a href="/views/edit.jsp?id=<%=n.getId()%>" class="btn btn-primary">EDIT</a>
-                        <form action="/delete?id=<%= n.getId() %>" method="post" class="m-0 p-0">
+                        <form action="/newsDelete?id=<%= n.getId() %>" method="post" class="m-0 p-0">
                             <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>
                     </div>

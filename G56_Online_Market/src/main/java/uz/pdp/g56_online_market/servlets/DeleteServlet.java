@@ -9,7 +9,7 @@ import uz.pdp.g56_online_market.daos.NewsDAO;
 
 import java.io.IOException;
 
-@WebServlet("/delete")
+@WebServlet("/newsDelete")
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

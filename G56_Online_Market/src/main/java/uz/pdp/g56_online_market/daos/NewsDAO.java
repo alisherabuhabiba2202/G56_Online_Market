@@ -1,6 +1,7 @@
 package uz.pdp.g56_online_market.daos;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import uz.pdp.g56_online_market.config.JpaConfig;
 import uz.pdp.g56_online_market.entities.News;
@@ -12,20 +13,31 @@ public class NewsDAO {
 
     public static News getNewsById(int id) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
+        EntityTransaction tx = null;
         try {
-            Query query = em.createNativeQuery("select * from news where id = ?");
+            tx = em.getTransaction();
+            tx.begin();
+
+            Query query = em.createNativeQuery("select * from news where id = ?1");
             query.setParameter(1, id);
             Object[] row = (Object[]) query.getSingleResult();
             News news = new News();
             news.setId((Integer) row[0]);
             news.setTitle((String) row[1]);
             news.setDescription((String) row[2]);
+
+            tx.commit();
             return news;
-        }finally {
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        } finally {
             em.close();
         }
     }
-
     public static byte[] getByteaById(int id) {
         EntityManager em = JpaConfig.getEntityManagerFactory().createEntityManager();
         try {
